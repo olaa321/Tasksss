@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Список заданий</h1>
+<p><a href="{% url 'task_create' %}">Добавить задание</a></p>
+<form method="get">
+    {{ form.status.label_tag }} {{ form.status }}
+    {{ form.status.label_tag }} {{ form.priority }}
+    <button type="submit">Фильтрировать</button>
+</form>
+<ul>
+    {% for task in tasks %}
+        <li>
+            <a href="{% url 'task-detail' task.pk %}">{{ task.title }}</a> {{ task.status }} {{ task.priority }}
+        </li>
+    {% empty %}
+        <li>Заданий не найдено</li>
+    {% endfor %}
+</ul>
+{% endblock %}
